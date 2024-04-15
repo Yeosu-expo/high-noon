@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Globalization;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -89,6 +91,10 @@ public class Player : MonoBehaviour
 
         if(rDown && fDown && isFireReady)
         {
+            PlayerChunk chunk = new PlayerChunk("TEST_ID", DateTime.Now.ToString(), 10);
+            Debug.Log("Sending~");
+            HTTP_Request.Instance.PostChunkToServer(chunk, "http://210.125.31.150:6000/ServingChunk");
+            Debug.Log("Send.");
             weapon.Use(0);
             anim.SetTrigger("doFire");
             fireDelay = 0;
